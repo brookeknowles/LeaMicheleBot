@@ -1,16 +1,41 @@
-# This is a sample Python script.
+import os
+import discord
+from dotenv import load_dotenv
+from discord.ext import commands
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+load_dotenv()
+TOKEN = os.getenv('TOKEN')
+
+client = commands.Bot(command_prefix='!')
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+@client.event
+async def on_ready():
+    print(f'{client.user} has connected to Discord!')
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+@client.event
+async def on_message(message):
+    username = str(message.author).split("#")[0]
+    channel = str(message.channel.name)
+    user_message = str(message.content)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    print(f'Message {user_message} by {username} on {channel}')
+
+    if message.author == client.user:
+        return
+
+    if channel == "general":
+        if user_message.lower() == "hello" or user_message.lower() == "hi":
+            await message.channel.send(f'Hello {username}')
+            return
+        elif user_message.lower() == "bye":
+            await message.channel.send(f'Bye {username}')
+        await client.process_commands(message)      # need this so the commands don't get overwritten
+
+@client.command()
+async def hello(ctx):
+    await ctx.send('hi yuh!')
+
+
+client.run(TOKEN)
