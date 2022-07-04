@@ -47,11 +47,15 @@ async def add(ctx, *message):
     """ User can add an emoji and its english translation to the dictionary.
         At the moment the program needs to be terminated and then restarted for the bot to translate the added words"""
 
-    name = message[0]
-    emoji = message[1]
+    if len(message) > 2:
+        await ctx.send("Incorrect format. Please try again in the format: !add {name} {emoji} \ne.g. '!add fire 🔥'")
 
-    add_emoji(name, emoji)
+    else:
+        name = message[0]
+        emoji = message[1]
 
-    await ctx.send("emoji has been added to the dictionary!")
+        add_emoji(name, emoji)
+
+        await ctx.send("emoji has been added to the dictionary!")
 
 client.run(TOKEN)
