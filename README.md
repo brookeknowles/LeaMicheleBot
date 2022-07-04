@@ -1,4 +1,4 @@
-# ActivityBot
+# LeaMicheleBot
  
 This Discord bot translates users messages from plain english into emojis, Lea Michele instagram style 
 
