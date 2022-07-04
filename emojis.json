@@ -1,10 +1,15 @@
 {
-  "lol" : "\uD83D\uDE02",
-  "sick":"\uD83D\uDE28",
-  "happy": "\uD83D\uDE00",
-  "mermaid": "\uD83E\uDDDC\u200D",
-  "clown": "\uD83E\uDD21",
-  "alien": "\uD83D\uDC7D",
-  "shit": "\uD83D\uDCA9",
-  "rat": "\uD83D\uDC00"
+    "lol": "\ud83d\ude02",
+    "sick": "\ud83d\ude28",
+    "happy": "\ud83d\ude00",
+    "mermaid": "\ud83e\udddc\u200d",
+    "clown": "\ud83e\udd21",
+    "alien": "\ud83d\udc7d",
+    "shit": "\ud83d\udca9",
+    "rat": "\ud83d\udc00",
+    "skull": "\ud83d\udc80",
+    "fire": "\ud83d\udd25",
+    "soccer": "\u26bd",
+    "basketball": "\ud83c\udfc0",
+    "guitar": "\ud83c\udfb8"
 }

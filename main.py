@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 
-from functions import emojify
+from functions import emojify, add_emoji
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
@@ -21,23 +21,37 @@ async def on_message(message):
     channel = str(message.channel.name)
     user_message = str(message.content)
 
-    print(f'Message {user_message} by {username} on {channel}')
+    print(f'Message {user_message} by {username} on {channel}')     # prints message log on terminal
 
-    if message.author == client.user:
-        return
-
-    if channel == "general":
-        if user_message.lower() == "hello bot" or user_message.lower() == "hi bot":
-            await message.channel.send(f'Hello {username}')
-            return
-        elif user_message.lower() == "bye bot":
-            await message.channel.send(f'Bye {username}')
-        await client.process_commands(message)      # need this so the commands don't get overwritten
+    await client.process_commands(message)                          # need this so the commands don't get overwritten
 
 
 @client.command()
 async def translate(ctx, *message):
-    output = emojify(message)
+    """ user types '!translate' followed by a message, bot then replies with that message translated to emojis"""
+
+    output = emojify(message)[0]
+    unknown = emojify(message)[1]
+
     await ctx.send(output)
+
+    if len(unknown):    # list isn't empty, there were unknown words
+        await ctx.send("The following words do not currently have a translation: ")
+        await ctx.send(unknown)
+        await ctx.send("Consider adding them to the dictionary with the !add command, in the format {name} {emoji}" +
+                       "\ne.g. '!add fire 🔥'")
+
+
+@client.command()
+async def add(ctx, *message):
+    """ User can add an emoji and its english translation to the dictionary.
+        At the moment the program needs to be terminated and then restarted for the bot to translate the added words"""
+
+    name = message[0]
+    emoji = message[1]
+
+    add_emoji(name, emoji)
+
+    await ctx.send("emoji has been added to the dictionary!")
 
 client.run(TOKEN)
