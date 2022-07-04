@@ -2,7 +2,7 @@
  
 Fun little Discord bot that translates users messages from plain english into emojis, Lea Michele instagram style
 
-## How to use
+## Using The Bot
 
 User can get the bot to translate their message with the !translate command e.g.: 
 
@@ -16,7 +16,10 @@ User can then use the !add command to add words and their emoji translation:
 
 ![Screenshot](/screenshots/add-emoji.png)
 
-## Extra
+## Set Up
 
 More info on making bots on discord developers website https://discord.com/developers/applications
+
+## Extra
+
 If you're confused by the Lea Michele association check out https://thetab.com/uk/2022/03/16/lea-michele-illiterate-conspiracy-243951
