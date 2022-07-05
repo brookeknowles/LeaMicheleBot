@@ -34,6 +34,20 @@ def add_emoji(name, emoji):
         with open('emojis.json', 'w') as f:
             json.dump(emoji_data, f, indent=4)
 
+
+def update_emoji(name, emoji):
+    """ Updates the given word's emoji translation from whatevers currently saved in emojis.json to the given
+        emoji """
+
+    with open("emojis.json", "r") as jsonFile:
+        data = json.load(jsonFile)
+
+    data[name] = emoji
+
+    with open("emojis.json", "w") as jsonFile:
+        json.dump(data, jsonFile, indent=4)
+
+
 def does_translation_exist(word):
     """ Checks if a word exists in the emojis.json file. If it exists, function returns the corresponding emoji,
         otherwise will return False """
@@ -44,3 +58,5 @@ def does_translation_exist(word):
             return emoji_data[word]
         else:
             return False
+
+update_emoji("lol", "\ud83d\ude02")

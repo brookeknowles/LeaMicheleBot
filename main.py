@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 
-from functions import emojify, add_emoji, does_translation_exist
+from functions import emojify, add_emoji, does_translation_exist, update_emoji
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
@@ -62,6 +62,23 @@ async def add(ctx, *message):
             await ctx.send(name + " AKA " + emoji + " has been added to the dictionary!")
         else:
             stored_emoji = does_translation_exist(name)
-            await ctx.send(name + " already exists in the dictionary as " + stored_emoji)
+            await ctx.send(name + " already exists in the dictionary as " + stored_emoji +
+                           "\nIf you would like to update the translation, try the !update command (e.g. '!update fire 🔥')")
+
+
+@client.command()
+async def update(ctx, *message):
+    """ User can update a word's emoji translation.
+        At the moment the program needs to be restarted to update the translation on discord"""
+
+    if len(message) != 2:
+        await ctx.send("Incorrect format. Please try again in the format: !update {name} {emoji} \ne.g. '!update fire 🔥'")
+
+    else:
+        name = message[0]
+        emoji = message[1]
+
+        update_emoji(name, emoji)
+        await ctx.send("The translation for " + name + " has been updated to " + emoji + "!")
 
 client.run(TOKEN)
