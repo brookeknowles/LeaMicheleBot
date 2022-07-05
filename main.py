@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 
-from functions import emojify, add_emoji
+from functions import emojify, add_emoji, does_translation_exist
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
@@ -28,7 +28,9 @@ async def on_message(message):
 
 @client.command()
 async def translate(ctx, *message):
-    """ user types '!translate' followed by a message, bot then replies with that message translated to emojis"""
+    """ user types '!translate' followed by a message, bot then replies with that message translated to emojis
+        message argument a tuple e.g. if they message "hello there", message = ("hello", "there")
+    """
 
     output = emojify(message)[0]
     unknown = emojify(message)[1]
@@ -54,8 +56,12 @@ async def add(ctx, *message):
         name = message[0]
         emoji = message[1]
 
-        add_emoji(name, emoji)
+        if not does_translation_exist(name):
+            add_emoji(name, emoji)
 
-        await ctx.send(name + " AKA " + emoji + " has been added to the dictionary!")
+            await ctx.send(name + " AKA " + emoji + " has been added to the dictionary!")
+        else:
+            stored_emoji = does_translation_exist(name)
+            await ctx.send(name + " already exists in the dictionary as " + stored_emoji)
 
 client.run(TOKEN)
