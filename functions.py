@@ -1,7 +1,14 @@
 import json
 
-f = open('emojis.json')
-data = json.load(f)
+
+def reloadJSON():
+    with open("emojis.json", "r") as f:
+        return json.loads(f.read())
+
+
+def add_to_JSON(data):
+    with open('emojis.json', 'w') as f:
+        return json.dump(data, f, indent=4)
 
 
 def emojify(message):
@@ -10,6 +17,7 @@ def emojify(message):
 
     output = ""
     unknown_words = []
+    data = reloadJSON()
 
     for word in message:
         if word.lower() in data:
@@ -22,41 +30,25 @@ def emojify(message):
     return output, unknown_words
 
 
-def add_emoji(name, emoji):
-    """ Takes in an emoji and its name, and adds them to the list of emojis in emojis.json"""
+def add_emoji(word, emoji):
+    """ Takes in an emoji and its name, and adds them to the list of emojis in emojis.json.
+        If a translation for the word already exists, it updates the translation to the input emoji"""
 
-    with open('emojis.json', "r") as info:
-        # Read existing data into new variable and append to new data it
-        emoji_data = json.load(info)
-        emoji_data[name] = emoji
+    # Read existing data into new variable and append to new data it
+    data = reloadJSON()
+    data[word] = emoji
 
-        # Write updated data stored in emoji_data variable to actual file
-        with open('emojis.json', 'w') as f:
-            json.dump(emoji_data, f, indent=4)
-
-
-def update_emoji(name, emoji):
-    """ Updates the given word's emoji translation from whatevers currently saved in emojis.json to the given
-        emoji """
-
-    with open("emojis.json", "r") as jsonFile:
-        data = json.load(jsonFile)
-
-    data[name] = emoji
-
-    with open("emojis.json", "w") as jsonFile:
-        json.dump(data, jsonFile, indent=4)
+    # Write updated data stored in emoji_data variable to actual file
+    add_to_JSON(data)
 
 
 def does_translation_exist(word):
     """ Checks if a word exists in the emojis.json file. If it exists, function returns the corresponding emoji,
         otherwise will return False """
 
-    with open('emojis.json', "r") as info:
-        emoji_data = json.load(info)
-        if word in emoji_data.keys():
-            return emoji_data[word]
-        else:
-            return False
+    data = reloadJSON()
 
-update_emoji("lol", "\ud83d\ude02")
+    if word in data.keys():
+        return data[word]
+    else:
+        return False
