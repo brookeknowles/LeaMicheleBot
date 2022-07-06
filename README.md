@@ -9,22 +9,28 @@ I have this hosted on Heroku to mess around with on my servers with friends, but
 ## Otherwise to run on local machine:
 
 ### Discord related set up
-- Head over to the [Discord Developer Portal](https://discord.com/developers/applications)
-- Create a *new application* - [RealPython has a good tutorial on this](https://realpython.com/how-to-make-a-discord-bot-python/)
-- Once you have created the application, note the token provided
+1. Head over to the [Discord Developer Portal](https://discord.com/developers/applications)
+2.  Create a *new application* - [RealPython has a good tutorial on this](https://realpython.com/how-to-make-a-discord-bot-python/)
+3.  Once you have created the application, note the token provided
 
 ### Application set up
-- Clone this repository
-- Open up the repository in your favourite IDE
-- Install the project dependencies:
-
-  > pip3 install -r requirements.txt
-- Create a .env file with the token:
-
-  > TOKEN={your-bot-token}
-- Run the app:
-
-  > python3 main.py
+1. Clone this repository
+```shell
+git clone https://github.com/brookeknowles/LeaMicheleBot.git
+```
+2. Open up the repository in your favourite IDE
+3. Install the project dependencies:
+```shell
+pip3 install -r requirements.txt
+```
+4. Create a .env file with your token from the earlier step, the only line in the file should be:
+```
+TOKEN={your-bot-token}
+```
+5. Run the app:
+```shell
+python3 main.py
+```
 
 ## Using The Bot
 
