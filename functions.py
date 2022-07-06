@@ -30,9 +30,21 @@ def emojify(message):
     return output, unknown_words
 
 
+def emojify_phrase(message):
+    data = reloadJSON()
+    unknown = False
+
+    if message.lower() in data:
+        emoji = data[message.lower()]
+        return emoji, unknown
+    else:
+        unknown = True
+        return message, unknown
+
+
 def add_emoji(word, emoji):
-    """ Takes in an emoji and its name, and adds them to the list of emojis in emojis.json.
-        If a translation for the word already exists, it updates the translation to the input emoji"""
+    """ Takes in an emoji and its corresponding word/phrase, and adds them to the list of emojis in emojis.json.
+        If a translation for the word/phrase already exists, it updates the translation to the input emoji"""
 
     # Read existing data into new variable and append to new data it
     data = reloadJSON()
@@ -43,7 +55,7 @@ def add_emoji(word, emoji):
 
 
 def does_translation_exist(word):
-    """ Checks if a word exists in the emojis.json file. If it exists, function returns the corresponding emoji,
+    """ Checks if a word/phrase exists in the emojis.json file. If it exists, function returns the corresponding emoji,
         otherwise will return False """
 
     data = reloadJSON()
