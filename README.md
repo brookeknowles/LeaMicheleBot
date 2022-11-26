@@ -2,11 +2,7 @@
 
 Fun little Discord bot that translates users messages from plain English into emojis, Lea Michele instagram style<sup>*</sup>
 
-## Set Up
-
-I have this hosted on Heroku to mess around with on my servers with friends, but feel free to invite the bot to your server with [this link](https://discord.com/api/oauth2/authorize?client_id=991976546833289296&permissions=534723950656&scope=bot)
-
-## Otherwise to run on local machine:
+## Set Up on local machine
 
 ### Discord related set up
 1. Head over to the [Discord Developer Portal](https://discord.com/developers/applications)
